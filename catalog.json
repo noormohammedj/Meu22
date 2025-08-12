@@ -1,0 +1,46 @@
+[
+  {
+    "id": 1,
+    "title_en": "Occasion Dress 1",
+    "title_ta": "சலுகை உடை 1",
+    "price": "3999",
+    "price_display": "₹3,999",
+    "lead_time": "2–3 weeks",
+    "image": "dress_1.jpg",
+    "description_en": "Tailorable: length, sleeves, fabric, embellishments.",
+    "description_ta": "முன்: நீளம், ஆலைகள், துணி, அலங்காரங்கள் மாற்றக்கூடியவை."
+  },
+  {
+    "id": 2,
+    "title_en": "Occasion Dress 2",
+    "title_ta": "சலுகை உடை 2",
+    "price": "4499",
+    "price_display": "₹4,499",
+    "lead_time": "2–3 weeks",
+    "image": "dress_2.jpg",
+    "description_en": "Elegant party wear, fully customizable.",
+    "description_ta": "அழகான பார்ட்டி அணிகலன், முழுமையாக மாற்றக்கூடியது."
+  },
+  {
+    "id": 3,
+    "title_en": "Occasion Dress 3",
+    "title_ta": "சலுகை உடை 3",
+    "price": "5299",
+    "price_display": "₹5,299",
+    "lead_time": "3–4 weeks",
+    "image": "dress_3.jpg",
+    "description_en": "Bridal-friendly designs with bespoke details.",
+    "description_ta": "வரவேற்பு நடுக்குரிய வடிவம் தனிப்பயன் விவரங்களுடன்."
+  },
+  {
+    "id": 4,
+    "title_en": "Occasion Dress 4",
+    "title_ta": "சலுகை உடை 4",
+    "price": "3799",
+    "price_display": "₹3,799",
+    "lead_time": "2–3 weeks",
+    "image": "dress_4.jpg",
+    "description_en": "Light & comfortable — perfect for festivals.",
+    "description_ta": "இலகு மற்றும் தணிக்கத்தக்கது — திருவிழாக்களுக்கு சிறந்தது."
+  }
+]

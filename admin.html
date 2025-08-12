@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Admin — FemmeDress</title>
+<link rel="manifest" href="/manifest.json"><script src="https://cdn.tailwindcss.com"></script><link rel="stylesheet" href="/styles.css"></head>
+<body class="bg-gray-50 font-sans">
+<main class="max-w-4xl mx-auto px-4 py-8">
+  <h1 class="text-2xl font-semibold mb-4">Admin — Edit Catalog</h1>
+  <div id="loginBox" class="bg-white p-4 rounded-xl shadow-sm">
+    <label class="block text-sm font-medium">Password</label>
+    <input id="pw" type="password" class="mt-2 border rounded px-3 py-2 w-full" />
+    <div class="mt-3"><button id="login" class="px-4 py-2 bg-pink-500 text-white rounded">Enter</button></div>
+    <div class="mt-2 text-sm text-gray-500">Password is client-side protected: <strong>M3uN3Wl@unch</strong></div>
+  </div>
+
+  <div id="adminUI" class="hidden mt-6">
+    <div class="bg-white p-4 rounded-xl shadow-sm">
+      <div class="flex justify-between items-center">
+        <div class="font-semibold">catalog.json</div>
+        <div class="flex gap-2">
+          <button id="downloadBtn" class="px-3 py-1 border rounded">Download JSON</button>
+          <input id="fileInput" type="file" accept=".json" class="hidden"/>
+          <button id="uploadBtn" class="px-3 py-1 border rounded">Upload JSON</button>
+          <button id="saveBtn" class="px-3 py-1 bg-pink-500 text-white rounded">Save (Download)</button>
+        </div>
+      </div>
+      <div class="mt-3">
+        <textarea id="editor" class="w-full h-64 mt-2 border rounded p-2 font-mono"></textarea>
+      </div>
+      <div class="mt-3 text-sm text-gray-500">Tip: Edit JSON and click "Save (Download)" to download an updated catalog.json to re-upload to your host. Static hosting can't be directly written from the browser.</div>
+    </div>
+  </div>
+</main>
+
+<script>
+const PASSWORD = 'M3uN3Wl@unch';
+document.getElementById('login').addEventListener('click', async ()=>{
+  const v = document.getElementById('pw').value;
+  if(v === PASSWORD){
+    document.getElementById('loginBox').classList.add('hidden');
+    document.getElementById('adminUI').classList.remove('hidden');
+    const res = await fetch('/catalog.json'); const data = await res.text();
+    document.getElementById('editor').value = data;
+  } else {
+    alert('Incorrect password');
+  }
+});
+
+document.getElementById('downloadBtn').addEventListener('click', async ()=>{
+  const res = await fetch('/catalog.json'); const data = await res.blob();
+  const url = URL.createObjectURL(data); const a = document.createElement('a'); a.href = url; a.download = 'catalog.json'; a.click(); URL.revokeObjectURL(url);
+});
+
+document.getElementById('uploadBtn').addEventListener('click', ()=> document.getElementById('fileInput').click());
+document.getElementById('fileInput').addEventListener('change', (e)=>{
+  const f = e.target.files[0];
+  if(!f) return;
+  const r = new FileReader();
+  r.onload = ()=>{ document.getElementById('editor').value = r.result; };
+  r.readAsText(f);
+});
+
+document.getElementById('saveBtn').addEventListener('click', ()=>{
+  const txt = document.getElementById('editor').value;
+  try{ JSON.parse(txt); }catch(e){ alert('Invalid JSON: ' + e.message); return; }
+  const blob = new Blob([txt], {type:'application/json'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a'); a.href = url; a.download = 'catalog.json'; a.click(); URL.revokeObjectURL(url);
+});
+</script>
+</body></html>
